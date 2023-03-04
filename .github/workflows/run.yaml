@@ -1,3 +1,8 @@
+name: Run Workflow
+on:
+  repository_dispatch:
+    types: [run-workflow]
+
 jobs:
   run-workflow:
     runs-on: ubuntu-latest
