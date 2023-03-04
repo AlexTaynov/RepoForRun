@@ -1,8 +1,7 @@
 name: Run Workflow
 on:
-  push:
-    branches:
-      - '*'
+  repository_dispatch:
+    types: [run-workflow]
 
 jobs:
   run-workflow:
