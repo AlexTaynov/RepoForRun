@@ -1,20 +1,27 @@
-name: Run Workflow
-on:
-  repository_dispatch:
-    types: [run-workflow]
+name: Selenium UI tests
+
+on: [push]
+#on:
+#  repository_dispatch:
+#    types: [run-workflow]
 
 jobs:
-  run-workflow:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Print message
-        run: echo "Привет"
-      - name: Python
-        uses: actions/setup-python@v1
-        with:
-          python-version: '3.9'
-          architecture: 'x64'
-      - name: run python
-        run: python3 main.py
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+        sudo apt-get update && sudo apt-get install -yqq unzip xvfb libxi6 libgconf-2-4
+        wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+        sudo dpkg -i google-chrome-stable_current_amd64.deb
+    - name: Run UI tests
+      run: |
+        Xvfb :99 -screen 0 1024x768x24 &
+        export DISPLAY=:99
+        python3 main.py
