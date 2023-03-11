@@ -1,9 +1,9 @@
 name: Selenium UI tests
 
-on: [push]
-#on:
-#  repository_dispatch:
-#    types: [run-workflow]
+#on: [push]
+on:
+  repository_dispatch:
+    types: [run-workflow]
 
 jobs:
   build:
