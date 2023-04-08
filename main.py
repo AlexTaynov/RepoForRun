@@ -94,6 +94,10 @@ class TestUI(unittest.TestCase):
         home_page = HomePage(self.driver)
         assert home_page.is_title_correct()
 
+    def test_tilte(self):
+        home_page = HomePage(self.driver)
+        assert home_page.is_title_correct()
+
     def test_catalog(self):
         home_page = HomePage(self.driver)
         home_page.click_catalog_link()
